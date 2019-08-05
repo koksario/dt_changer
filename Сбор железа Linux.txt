@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Запись информации о ЦПУ во временный файл
+# Запись информации о ЦПУ во временный файл 
 cat /proc/cpuinfo > ~/sysinfo_file_temp
 
 # Анализ информации и запись её в переменные с расчетом на возможный Hyper threading
@@ -10,10 +10,10 @@ number_cpu_cores=$(cat sysinfo_file_temp | grep 'cpu cores' | egrep -o '([[:digi
 coef=$((number_sibl/number_cpu_cores))
 number_cpu=$((number_cpu_raw/coef))
 
-# Удаление временного файла 
+# Удаление временного файла
 rm -rf ~/sysinfo_file_temp
 
-# Сбор ин-ции о памяти 
+# Сбор ин-ции о памяти
 memory=$(cat /proc/meminfo | grep MemTotal | egrep -o '([[:digit:]]+)')
 memory=$((memory/1024))
 
@@ -21,11 +21,11 @@ memory=$((memory/1024))
 hdd=$(df -P | egrep '^/dev/' | awk '{print $2}' | awk '{s += $1} END {print s}')
 hdd=$((hdd/1048576))
 
-# ОС через костыль 
+# ОС через костыль
 clear
 cat /etc/*-release
 read -p "Введите информацию об ОС > " os
-# Вывод информации
+# Вывод информации 
 clear
 echo "ЦП: $number_cpu ЦП по $number_cpu_cores ядра"
 echo "ОЗУ: $memory Мб"
