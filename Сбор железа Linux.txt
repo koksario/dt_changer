@@ -31,4 +31,3 @@ echo "ÖÏ: $number_cpu ÖÏ ןמ $number_cpu_cores ÿהנא"
 echo "ÎÇÓ: $memory Ìב"
 echo "ÆÄ: ~$hdd Ãב"
 echo "ÎÑ: $os"
-
