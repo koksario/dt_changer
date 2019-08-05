@@ -21,7 +21,7 @@ memory=$((memory/1024))
 hdd=$(df -P | egrep '^/dev/' | awk '{print $2}' | awk '{s += $1} END {print s}')
 hdd=$((hdd/1048576))
 
-# ОС через костыль
+# ОС через костыль 
 clear
 cat /etc/*-release
 read -p "Введите информацию об ОС > " os
