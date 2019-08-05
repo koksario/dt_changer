@@ -17,7 +17,7 @@ rm -rf ~/sysinfo_file_temp
 memory=$(cat /proc/meminfo | grep MemTotal | egrep -o '([[:digit:]]+)')
 memory=$((memory/1024))
 
-# Хард
+# Хард 
 hdd=$(df -P | egrep '^/dev/' | awk '{print $2}' | awk '{s += $1} END {print s}')
 hdd=$((hdd/1048576))
 
