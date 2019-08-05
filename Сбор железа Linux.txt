@@ -13,7 +13,7 @@ number_cpu=$((number_cpu_raw/coef))
 # ”даление временного файла 
 rm -rf ~/sysinfo_file_temp
 
-# —бор ин-ции о пам€ти
+# —бор ин-ции о пам€ти 
 memory=$(cat /proc/meminfo | grep MemTotal | egrep -o '([[:digit:]]+)')
 memory=$((memory/1024))
 
