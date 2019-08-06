@@ -1,4 +1,5 @@
 import os
+import time
 
 #
 # my_path = input("Абсолютный путь к папке с файлами (вида C:\\dir) > ")
@@ -24,8 +25,8 @@ def list_create():
                 pass
         else:
             time_dic[i] = x
-
-
+            print("Добавлен новый файл " + i)
 
 while True:
     list_create()
+    time.sleep(1)
