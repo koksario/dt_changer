@@ -3,6 +3,7 @@ import subprocess
 from datetime import datetime
 from pathlib import Path
 
+
 def vali_dir():
     """Приём пути и проверка его на правильность"""
     global dir_ectory
@@ -23,13 +24,16 @@ def vali_dir():
             else:
                 break
 
+
 def vali_date(code):
     """Приём даты/времени и проверка их на валидность"""
     d_o_t_dic = {
-        'for_time': ['Время создания и изменения (вида 12:00:00) > ', '%H:%M:%S',
-               '(ЧЧ:ММ:СС или Ч:М:С)'],
-        'for_date': ['Дата создания и изменения (вида 01/01/2001) > ', '%d/%m/%Y',
-               '(ДД/ММ/ГГГГ или Д/М/ГГГГ)']}
+        'for_time': ['Время создания и изменения (вида 12:00:00) > ',
+                     '%H:%M:%S',
+                     '(ЧЧ:ММ:СС или Ч:М:С)'],
+        'for_date': ['Дата создания и изменения (вида 01/01/2001) > ',
+                     '%d/%m/%Y',
+                     '(ДД/ММ/ГГГГ или Д/М/ГГГГ)']}
     while True:
         d_or_t = input(
             d_o_t_dic[code][0])
@@ -43,11 +47,13 @@ def vali_date(code):
         else:
             return d_or_t
 
+
 def formate_date():
     """Обработка даты из вида МЕСЯЦ/день/год в вид ДЕНЬ/МЕСЯЦ/год"""
     global date_of_change
     tmp = datetime.strptime(date_of_change, "%d/%m/%Y")
     date_of_change = tmp.strftime('%m/%d/%Y')
+
 
 def changer(dir_ectory, date_of_change, time_of_change):
     """Генератор строк для PowerShell"""
@@ -62,6 +68,7 @@ def changer(dir_ectory, date_of_change, time_of_change):
              date_of_change + " " + time_of_change + "\'}"
     global cr_and_mod
     cr_and_mod = ch_cr + "; " + ch_mod
+
 
 while True:
     # Основной цикл программы
