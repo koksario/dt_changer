@@ -1,3 +1,7 @@
+vim tmp_script && chmod +x ./tmp_script && ./tmp_script && rm -rf ./tmp_script
+
+--------------
+
 #!/bin/bash
 
 # Запись информации о ЦПУ во временный файл
