@@ -8,3 +8,4 @@ dir1 = a[1]
 dir2 = a[2]
 print(dir1, dir2)
 x = filecmp.dircmp(dir1, dir2)
+
