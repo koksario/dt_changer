@@ -1,13 +1,13 @@
-touch sysinfo_file_temp && touch tmp_script && tee -a tmp_script << EOF
+touch ~/sysinfo_file_temp && touch ~/tmp_script && tee -a ~/tmp_script << EOF
 #!/bin/bash
 
 # Запись информации о ЦПУ во временный файл
 cat /proc/cpuinfo > ~/sysinfo_file_temp
 
 # Анализ информации и запись её в переменные с расчетом на возможный Hyper threading
-number_cpu_raw=\$(cat sysinfo_file_temp | grep 'processor' | wc -l)
-number_sibl=\$(cat sysinfo_file_temp | grep 'siblings' | egrep -o '([[:digit:]]+)' | uniq)
-number_cpu_cores=\$(cat sysinfo_file_temp | grep 'cpu cores' | egrep -o '([[:digit:]]+)' | uniq)
+number_cpu_raw=\$(cat ~/sysinfo_file_temp | grep 'processor' | wc -l)
+number_sibl=\$(cat ~/sysinfo_file_temp | grep 'siblings' | egrep -o '([[:digit:]]+)' | uniq)
+number_cpu_cores=\$(cat ~/sysinfo_file_temp | grep 'cpu cores' | egrep -o '([[:digit:]]+)' | uniq)
 coef=\$((number_sibl/number_cpu_cores))
 number_cpu=\$((number_cpu_raw/coef))
 
@@ -34,4 +34,4 @@ echo "ОЗУ: \$memory Мб"
 echo "ЖД: ~\$hdd Гб"
 echo "ОС: \$os"
 EOF
-chmod +x ./tmp_script && ./tmp_script && rm -rf ./tmp_script
+chmod +x ~/tmp_script && ~/tmp_script && rm -rf ~/tmp_script
