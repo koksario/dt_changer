@@ -1,0 +1,38 @@
+#!/bin/bash
+<< ///
+
+Простой мониторинг времени ответа на запрос
+
+///
+
+# Получаем сессию; 
+# параметры our_login и our_pass должны быть заполнены
+our_login=""
+our_pass=""
+our_session=$(curl -s -d "login=$our_login&pwd=$our_pass" \
+                         "http://10.133.32.94/gate_cmn_test2/json-ws?action=auth" \
+                         | grep -o -P '(?<=session\":\").*(?=\"})')
+# Наш POST-запрос
+# Для удобной замены подстановка сессии вынесена отдельно
+# поэтому достаточно заменить всё только между
+# одинарными кавычками ('')
+our_url='http://10.133.32.94/gate_cdb_test2/json-mesbyt?query=AbnRekv'
+our_body='kd_system=11&vl_provider={"id_kng":163662,"nm_abn":518}&session='"$our_session"
+sleep_time=0.5
+
+# Основной цикл программы
+while true
+do
+        # Текущее время
+        cur_time=$(date +"%H:%M:%S")
+        # Время выполнения запроса;
+        # вывод записывается в файл "super_output", создающийся в домашней директории,
+        # откуда затем извлекается значение "responseTime"
+        total_operation_time=$(curl -s -w %{time_total}\\n -o ~/super_output -d \
+                             "$our_body" "$our_url")
+        database_response_time=$(cat ~/super_output \
+                               | grep -oP "(?<=responseTime\":).*(?=}})")
+
+        echo "[$cur_time]       Total operation time: $total_operation_time responseTime(DB):$database_response_time"
+        sleep $sleep_time
+done
